@@ -27,6 +27,15 @@ readfile = missing("function", waxreadfile) and function(file, safe)
     if safe == true then return pcall(waxreadfile, file) end
     return waxreadfile(file)
 end
+isfile = missing("function", isfile, readfile and function(file)
+    local success, result = pcall(function()
+        return readfile(file)
+    end)
+    return success and result ~= nil and result ~= ""
+end)
+makefolder = missing("function", makefolder)
+isfolder = missing("function", isfolder)
+waxgetcustomasset = missing("function", getcustomasset or getsynasset)
 hookfunction = missing("function", hookfunction)
 hookmetamethod = missing("function", hookmetamethod)
 getnamecallmethod = missing("function", getnamecallmethod or get_namecall_method)
